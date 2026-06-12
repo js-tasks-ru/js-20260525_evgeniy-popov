@@ -1,11 +1,11 @@
 import { createElement } from "../../shared/utils/create-element";
 
 interface Options {
-  data: number[],
-  label: string,
-  value: string,
+  data?: number[],
+  label?: string,
+  value?: number,
   link?: string,
-  formatHeading?: (value: string) => string,
+  formatHeading?: (value: number) => string,
 }
 
 export default class ColumnChart {
@@ -14,10 +14,10 @@ export default class ColumnChart {
 
   private data: number[];
   private label: string;
-  private value: string;
-  private link?: string;
-  private formatHeading: (value: string) => string;
-  constructor({ data = [], label = '', value = '', link = '', formatHeading = (value: string) => value }: Options = {}) {
+  private value: number;
+  private link: string;
+  private formatHeading: (value: number) => string;
+  constructor({ data = [], label = '', value = 0, link = '', formatHeading = (value: number) => String(value) }: Options = {}) {
     this.data = data;
     this.label = label;
     this.value = value;
@@ -27,14 +27,16 @@ export default class ColumnChart {
     this.element = createElement(this.getTemplate());
   }
 
-  update(data) {
+  update(data: number[]) {
     this.data = data;
     if (this.element) {
-      const charBody = this.element.querySelector('.column-chart__chart');
+      const charBody: HTMLElement | null = this.element.querySelector('.column-chart__chart');
 
-      charBody.innerHTML = `${this.getColumnBody()}`;
+      if (charBody) {
+        charBody.innerHTML = `${this.getColumnBody()}`;
 
-      this.element.classList.toggle('column-chart_loading', !this.data.length);
+        this.element.classList.toggle('column-chart_loading', !this.data.length);
+      }
     }
   }
 
