@@ -14,9 +14,9 @@ export default class ColumnChart {
 
   private data: number[];
   private label: string;
-  private value: string | number;
+  private value: string;
   private link?: string;
-  private formatHeading: (value: string | number) => string;
+  private formatHeading: (value: string) => string;
   constructor({ data = [], label = '', value = '', link = '', formatHeading = (value: string) => value }: Options = {}) {
     this.data = data;
     this.label = label;
