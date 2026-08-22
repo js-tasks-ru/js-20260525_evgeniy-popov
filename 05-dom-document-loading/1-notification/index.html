@@ -1,21 +1,25 @@
 <!doctype html>
-<meta charset="UTF-8">
-
+<html lang="en">
 <head>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <title>Notification</title>
 </head>
 
-<button id="btn1">Show simple message!</button>
+<body>
+  <button id="btn1">Show simple message!</button>
 
-<script type="module">
-  import NotificationMessage from './index.ts';
+  <script type="module">
+    import NotificationMessage from './index.ts';
 
-  btn1.addEventListener('click', () => {
-    const notification = new NotificationMessage('Hello World', {
-      duration: 2000,
-      type: 'success'
+    btn1.addEventListener('click', () => {
+      const notification = new NotificationMessage('Hello World', {
+        duration: 2000,
+        type: 'success'
+      });
+
+      notification.show();
     });
-
-    notification.show();
-  });
-</script>
+  </script>
+</body>
+</html>
